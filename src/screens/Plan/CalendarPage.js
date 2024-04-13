@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity ,Modal} from 'react-native';
 import Menu from '../../components/Menu';
 import Header from '../../components/Header';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import Icon từ thư viện react-native-vector-icons
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const CalendarPage = ({navigation}) => {
   const daysInMonth = 31;
@@ -15,7 +16,16 @@ const CalendarPage = ({navigation}) => {
   const totalDaysToShow = previousMonthDays + daysInMonth;
 
   const calendarDays = [];
+  const { data, day } = useRoute().params;
+  console.log({day})
+  const { startHour, endHour } = data;
 
+  console.log(parseInt(day[0]))
+  for (let i = 0; i < day.length ; i++) {
+    if (day[i] == "CN"){
+      day[i] = "01"
+    }
+  }
   for (let i = previousMonthDays; i > 0; i--) {
     const date = new Date(2024, 1, i);
     calendarDays.unshift({
@@ -35,13 +45,13 @@ const CalendarPage = ({navigation}) => {
     });
   }
 
-  calendarDays.forEach(day => {
-    const date = new Date(2024, 2, day.day);
+  calendarDays.forEach(ngay => {
+    const date = new Date(2024, 2, ngay.day);
     const dayOfWeek = date.getDay();
-    if (dayOfWeek === 2 || dayOfWeek === 4) {
-      day.hasStar = true;
+    if (dayOfWeek === parseInt(day[0]) || dayOfWeek === parseInt(day[1])) {
+      ngay.hasStar = true;
     } else {
-      day.hasStar = false;
+      ngay.hasStar = false;
     }
   });
   const handleDayPress = () => {

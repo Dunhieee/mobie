@@ -6,8 +6,10 @@ import Starting from '../Vocabulary/Starting';
 import Plan from './CalendarPage';
 import PlanSche from './CalendarPage';
 import CalendarPage from './CalendarPage';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const TimeLine = ({ navigation }) => {
+const TimeLine = () => {
+  const navigation=useNavigation()
   const [startModalVisible, setStartModalVisible] = useState(false);
   const [endModalVisible, setEndModalVisible] = useState(false);
   const [repeatModalVisible, setRepeatModalVisible] = useState(false);
@@ -37,11 +39,13 @@ const TimeLine = ({ navigation }) => {
   const handleStartHourSelect = (hour) => {
     setSelectedStartHour(hour);
     setStartModalVisible(false);
+    console.log('Dữ liệu đã chọn start:', selectedStartHour);
   };
 
   const handleEndHourSelect = (hour) => {
     setSelectedEndHour(hour);
     setEndModalVisible(false);
+    console.log('Dữ liệu đã chọn end:', selectedEndHour);
   };
 
   const handleRepeatHourSelect = (hour) => {
@@ -50,12 +54,22 @@ const TimeLine = ({ navigation }) => {
   };
   const handleButtonPress = page => {
     // Thực hiện chuyển sang trang mới tương ứng với page
-    navigation.navigate(page);
+    handleNext('CalendarPage');
+    // navigation.navigate(page);
   };
   const handleSave = () => {
     // Xử lý lưu dữ liệu đã chọn ở đây
     console.log('Dữ liệu đã chọn:', selectedWeekdays);
     setRepeatModalVisible(false);
+  };
+  const handleNext = (page) => {
+    const dataToSend = {
+      startHour: selectedStartHour,
+      endHour: selectedEndHour,
+      weekdays: selectedWeekdays,
+    };
+  
+    navigation.navigate(page, {data: dataToSend , day: selectedWeekdays});
   };
   return (
     <View

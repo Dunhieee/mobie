@@ -7,19 +7,24 @@ import SelectComponent from '../../components/SelectComponent';
 import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function SelectSubject({navigation}) {
+export default function SelectSubject() {
   const languages = [
-    {code: 'fr',  name: 'Trường Học'},
-    {code: 'es',  name: 'Nhà Cửa'},
-    {code: 'is',  name: 'Động Vật'},
-    {code: 'de',  name: 'Trái Cây'},
+    {code: 'truong hoc',  name: 'Trường Học'},
+    {code: 'nha cua',  name: 'Nhà Cửa'},
+    {code: 'dong vat',  name: 'Động Vật'},
+    {code: 'trai cay',  name: 'Trái Cây'},
   ];
   const [value, setValue] = React.useState('nguPhap');
   const propsToSend = 'Hello from HomeScreen';
-  const handleButtonPress = page => {
+  const navigation=useNavigation();
+  const {goitu}=useRoute().params
+  console.log("goi",{goitu})
+  const handleButtonPress = value => {
+    console.log("ne")
     // Thực hiện chuyển sang trang mới tương ứng với page
-    navigation.navigate(page, {id: value });
+    navigation.navigate('SelectLevel', {chude: value ,goitu});
   };
   console.log(value);
   return (
@@ -70,9 +75,9 @@ export default function SelectSubject({navigation}) {
         <TouchableOpacity
           style={styles.button1}
           onPress={() => {
-            navigation.navigate('SelectLevel', {id: value});
+            handleButtonPress(value)
           }}>
-          <Text style={{color: 'white'}}> NEXT</Text>
+          <Text style={{color: 'white'}}> NEXT1</Text>
         </TouchableOpacity>
       </View>
       <View

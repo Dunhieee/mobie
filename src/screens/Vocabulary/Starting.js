@@ -8,23 +8,29 @@ import Menu from '../../components/Menu';;
 import {useRoute} from '@react-navigation/native';
 import Vocab from './Vocab';
 
+
 export default function Starting({navigation}) {
+  const {chude,goitu, mucdo}=useRoute().params
+  console.log("start",{chude,goitu,mucdo})
   useEffect(() => {
+  
     const timer = setTimeout(() => {
       // Chuyển sang màn hình khác sau 2 giây
-      navigation.replace('vocabulary'); // Thay 'NextScreen' bằng tên màn hình tiếp theo
+      navigation.replace("vocabulary", {chude,goitu, mucdo}); // Thay 'NextScreen' bằng tên màn hình tiếp theo
     }, 1000);
 
     return () => clearTimeout(timer); // Xóa timer nếu component unmounted
   }, [navigation]);
 
-  const handleButtonPress = page => {
+  // const {chude,goitu, mucdo}=useRoute().params
+  // console.log("start",{chude,goitu,mucdo})
+  // const handleButtonPress = value=> {
     
-    // Thực hiện chuyển sang trang mới tương ứng với page
-    navigation.navigate(page);
-  };
+  //   // Thực hiện chuyển sang trang mới tương ứng với page
+  //   navigation.navigate("vocabulary", {chude,goitu, mucdo});
+  // };
 
- 
+  
   return (
     <View
       style={{

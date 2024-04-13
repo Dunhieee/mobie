@@ -121,7 +121,7 @@ export default function Vocab_bana_2({navigation}) {
         </View>
       </View>
       
-      <View
+<View
         style={{
           height: '22%',
           display: 'flex',
@@ -136,7 +136,7 @@ export default function Vocab_bana_2({navigation}) {
           <Text style={{color: 'white'}}> FINISH</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button1}
+          style      ={styles.button1}
           onPress={() => handleButtonPress(Vocab)}>
           <Text style={{color: 'white'}}> NEXT</Text>
         </TouchableOpacity>

@@ -10,20 +10,22 @@ import Starting from './Starting';
 
 export default function SelectLevel({navigation}) {
   const languages = [
-    {code: 'en', flag: '../../assets/Images/flag/vn.webp', name: 'Dễ'},
-    {code: 'fr', flag: '../../assets/Images/flag/vn.webp', name: 'Trung bình'},
-    {code: 'es', flag: '../../assets/Images/flag/vn.webp', name: 'Khó'},
-    {code: 'de', flag: '../../assets/Images/flag/vn.webp', name: 'Rất khó'},
+    {code: 'de', flag: '../../assets/Images/flag/vn.webp', name: 'Dễ'},
+    {code: 'tb', flag: '../../assets/Images/flag/vn.webp', name: 'Trung bình'},
+    {code: 'kh', flag: '../../assets/Images/flag/vn.webp', name: 'Khó'},
+    {code: 'ratkho', flag: '../../assets/Images/flag/vn.webp', name: 'Rất khó'},
     // {code: 'de', flag: '../../assets/Images/flag/vn.webp', name: 'German'},
   ];
   const [value1, setValue1] = React.useState(null);
   // const {id} = navigation.params;
   // const route = useRoute();
   // const {id} = route.params;
-  const handleButtonPress = page => {
+  const {chude,goitu}=useRoute().params
+  console.log("level",{chude,goitu})
+  const handleButtonPress = value => {
     
     // Thực hiện chuyển sang trang mới tương ứng với page
-    navigation.navigate(page);
+    navigation.navigate("Starting", {mucdo:value, chude, goitu});
   };
 
   // console.log(id);
@@ -73,7 +75,7 @@ export default function SelectLevel({navigation}) {
         }}>
         <TouchableOpacity
           style={styles.button1}
-          onPress={() => handleButtonPress(Starting)}>
+          onPress={() => handleButtonPress(value1)}>
           <Text style={{color: 'white'}}> NEXT</Text>
         </TouchableOpacity>
       </View>

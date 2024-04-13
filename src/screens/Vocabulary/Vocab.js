@@ -8,7 +8,7 @@ import Menu from '../../components/Menu';;
 import Vocab_2 from './Vocab_2';
 import { useNavigation} from '@react-navigation/native';
 import data from '../../data'
-export default function Vocab({page}) {
+export default function Vocab({page,mucdo,goitu,chude}) {
   const navigation= useNavigation();
   const [data1,setData1]=useState()
   const handleButtonPress = () => {
@@ -19,19 +19,34 @@ export default function Vocab({page}) {
 
   //   const {itemId, otherParam} = route.params;
   //   console.log(JSON.stringify(itemId));
-  useEffect(()=>{
+//   useEffect(()=>{
     
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data[page]}`);
-        const json = await response.json();
-        console.log({res:json[0]})
-       setData1(json[0])
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData()
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data[page]}`);
+//         const json = await response.json();
+//         console.log({res:json[0]})
+//        setData1(json[0])
+//       } catch (error) {
+//         console.error('Error fetching data:', error);
+//       }
+//     };
+//     fetchData()
+// },[page])
+useEffect(()=>{
+    
+  const fetchData = async () => {
+    console.log({page,mucdo,goitu,chude})
+    try {
+      const response = await fetch(`http://192.168.0.33:5000/api/vocabulary/getvocabulary?page=${page}&mucdo=${mucdo}&goitu=${goitu}&chude=${chude}`);
+      const json = await response.json();
+      console.log({res12345:json?.response})
+     setData1(json?.response)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  fetchData()
 },[page])
 console.log({data1})
   return (

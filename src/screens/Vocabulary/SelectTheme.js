@@ -7,24 +7,27 @@ import SelectComponent from '../../components/SelectComponent';
 import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
 export default function SelectTheme({navigation}) {
   const languages = [
     {
-      code: 'coBan',
+      code: 'co ban',
       name: 'Từ Vựng Cơ Bản',
     },
-    {code: 'fr',  name: 'Từ vựng TOEIC'},
-    {code: 'es',  name: 'Từ vựng IELTS'},
-    {code: 'de',  name: 'Từ vựng TOEFL'},
+    {code: 'toeic',  name: 'Từ vựng TOEIC'},
+    {code: 'ielts',  name: 'Từ vựng IELTS'},
+    {code: 'toefl ',  name: 'Từ vựng TOEFL'},
     // {code: 'de', flag: '../../assets/Images/flag/vn.webp', name: 'Rất khó'},
     // {code: 'de', flag: '../../assets/Images/flag/vn.webp', name: 'German'},
   ];
   const [value, setValue] = React.useState('nguPhap');
   const propsToSend = 'Hello from HomeScreen';
-  const handleButtonPress = page => {
+  // const {goitu}=useRoute().params
+  // console.log("goi",{goitu})
+  const handleButtonPress = value => {
     // Thực hiện chuyển sang trang mới tương ứng với page
-    navigation.navigate(page, {id: value });
+    navigation.navigate('SelectSubject', {goitu: value });
   };
   console.log(value);
   return (
@@ -74,7 +77,7 @@ export default function SelectTheme({navigation}) {
         <TouchableOpacity
           style={styles.button1}
           onPress={() => {
-            navigation.navigate('SelectSubject', {id: value});
+            handleButtonPress(value)
           }}>
           <Text style={{color: 'white'}}> NEXT</Text>
         </TouchableOpacity>

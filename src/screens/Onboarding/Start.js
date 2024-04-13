@@ -1,16 +1,19 @@
+import { useRoute } from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 export default function Start({navigation}) {
+
   useEffect(() => {
     const timer = setTimeout(() => {
       // Chuyển sang màn hình khác sau 2 giây
       navigation.replace('GetStart'); // Thay 'NextScreen' bằng tên màn hình tiếp theo
     }, 3000);
-
+    
     return () => clearTimeout(timer); // Xóa timer nếu component unmounted
   }, [navigation]);
-
+//  const {chude,goitu, mucdo}=useRoute().params
+//   console.log("start",{chude,goitu,mucdo})
   return (
     <View style={styles.container}>
       <Image
